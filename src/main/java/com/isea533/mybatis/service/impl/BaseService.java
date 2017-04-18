@@ -34,7 +34,6 @@ import java.util.List;
  * Created by liuzh on 2014/12/11.
  */
 public abstract class BaseService<T> implements IService<T> {
-
     @Autowired
     protected Mapper<T> mapper;
 

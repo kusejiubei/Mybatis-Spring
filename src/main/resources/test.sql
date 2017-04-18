@@ -221,11 +221,11 @@ INSERT INTO `country` VALUES (183,'Zambia','ZM');
 UNLOCK TABLES;
 
 #
-# Table structure for table user login info
+# Table structure for table user_login_info
 #
 
-DROP TABLE IF EXISTS `user login info`;
-CREATE TABLE `user login info` (
+DROP TABLE IF EXISTS `user_login_info`;
+CREATE TABLE `user_login_info` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(32) NOT NULL DEFAULT '' COMMENT '登录名',
   `logindate` datetime DEFAULT NULL COMMENT '登录时间',
@@ -234,12 +234,12 @@ CREATE TABLE `user login info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户登录日志';
 
 #
-# Dumping data for table user login info
+# Dumping data for table user_login_info
 #
-LOCK TABLES `user login info` WRITE;
-/*!40000 ALTER TABLE `user login info` DISABLE KEYS */;
+LOCK TABLES `user_login_info` WRITE;
+/*!40000 ALTER TABLE `user_login_info` DISABLE KEYS */;
 
-/*!40000 ALTER TABLE `user login info` ENABLE KEYS */;
+/*!40000 ALTER TABLE `user_login_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
 #
