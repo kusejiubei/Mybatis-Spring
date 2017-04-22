@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.isea533.mybatis.mapper.CountryMapper">
-<resultMap id="BaseResultMap" type="country">
+  <resultMap id="BaseResultMap" type="com.isea533.mybatis.model.Country">
     <!--
       WARNING - @mbggenerated
     -->
     <id column="Id" jdbcType="INTEGER" property="id" />
     <result column="countryname" jdbcType="VARCHAR" property="countryname" />
     <result column="countrycode" jdbcType="VARCHAR" property="countrycode" />
-</resultMap>
+  </resultMap>
 
-<select id="selectByCountryQueryModel" resultMap="BaseResultMap" >
+<select id="selectByCountryQueryModel" resultMap="BaseResultMap">
     select id,countryname,countrycode from country
     <where>
             1=1
@@ -28,4 +28,7 @@
 
 <select id="getPageSizeZeroelectbyId" resultMap="BaseResultMap">
     SELECT * FROM  user_info a where a.username = #{var1}</select>
+    <select id="selectById" resultType="com.isea533.mybatis.model.Country">
+        SELECT * FROM  country a where a.Id = #{ids}
+    </select>
 </mapper>

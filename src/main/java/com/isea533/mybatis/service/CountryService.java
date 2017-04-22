@@ -20,5 +20,6 @@ public interface CountryService extends IService<Country> {
      */
     List<Country> selectByCountry(Country country, int page, int rows);
     List<Country> selectByCountryQueryModel(String countryname, String countrycode, String id );
+    List<Country> selectById(String id );
 
 }

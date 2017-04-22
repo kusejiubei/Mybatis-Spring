@@ -45,5 +45,10 @@ public class CountryServiceImpl extends BaseService<Country> implements CountryS
         return countryMapper.selectByCountryQueryModel(countryname,countrycode,id);
     }
 
+    @Override
+    public List<Country> selectById(String id) {
+        return countryMapper.selectById(id);
+    }
+
 
 }

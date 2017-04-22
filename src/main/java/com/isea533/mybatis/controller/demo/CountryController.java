@@ -70,6 +70,7 @@ public class CountryController {
     @RequestMapping("findAll")
     public String findAll(String countryname, String countrycode, String id,ModelMap model) {
         List<Country> list = countryService.selectByCountryQueryModel(countryname,countrycode,id);
+//        List<Country> list = countryService.selectById(id);
         model.addAttribute("list",list);
         return "findAll";
     }

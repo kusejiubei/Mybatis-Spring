@@ -10,5 +10,6 @@ public interface CountryMapper extends MyMapper<Country> {
 
     public List<Country> getPageSizeZeroelectbyId(@Param("var1") Country country, String id);
     List<Country> selectByCountryQueryModel(@Param("countryname")String countryname,@Param("countrycode")String countrycode,@Param("id") String id );
+    List<Country> selectById(String id );
 
 }
