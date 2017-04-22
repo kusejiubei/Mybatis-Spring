@@ -39,6 +39,18 @@ public class CountryController {
         result.addObject("rows", rows);
         return result;
     }
+    @RequestMapping(value = "list1",method = RequestMethod.GET)
+    public ModelAndView getList1(Country country,
+                                @RequestParam(required = false, defaultValue = "1") int page,
+                                @RequestParam(required = false, defaultValue = "10") int rows) {
+        ModelAndView result = new ModelAndView(page_list);
+        List<Country> countryList = countryService.selectByCountry(country, page, rows);
+        result.addObject("pageInfo1", new PageInfo<Country>(countryList));
+        result.addObject("queryParam1", country);
+        result.addObject("page1", page);
+        result.addObject("rows1", rows);
+        return result;
+    }
 
     @RequestMapping(value = "view", method = RequestMethod.GET)
     public ModelAndView view(Country country) {
