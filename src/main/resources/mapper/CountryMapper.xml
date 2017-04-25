@@ -1,34 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.isea533.mybatis.mapper.CountryMapper">
-  <resultMap id="BaseResultMap" type="com.isea533.mybatis.model.Country">
-    <!--
-      WARNING - @mbggenerated
-    -->
-    <id column="Id" jdbcType="INTEGER" property="id" />
-    <result column="countryname" jdbcType="VARCHAR" property="countryname" />
-    <result column="countrycode" jdbcType="VARCHAR" property="countrycode" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.isea533.mybatis.model.Country">
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <id column="Id" jdbcType="INTEGER" property="id"/>
+        <result column="countryname" jdbcType="VARCHAR"  property="countryname"/>
+        <result column="countrycode" jdbcType="VARCHAR" property="countrycode"/>
+    </resultMap>
+    <update id="updateCountry">
+        UPDATE country
+        <set>
+            <if test="countryname != null and countryname != ''">
+                countryname= #{countryname},
+            </if>
+            <if test="countrycode != null and countrycode != ''">
+                countrycode = #{countrycode}
+            </if>
+        </set>
+        where Id = #{id}
+    </update>
+    <select id="selectByCountryQueryModel" resultMap="BaseResultMap">
+        select id,countryname,countrycode from country
+        <where><!--如果返回的内容以“AND”或者“OR”开头，它会把“AND”或者“OR”去掉-->
+            <if test="countryname != null and countryname != ''">
+                and countryname like concat('%',concat(#{countryname}, '%'))
+            </if>
+            <if test="countrycode != null and countrycode != ''">
+                and countrycode like '%${countrycode}%'  <!-- 这种有sql注入的风险-->
+            </if>
+            <if test="id != null and id != ''">
+                and Id = #{id}
+            </if>
+        </where>
+    </select>
 
-<select id="selectByCountryQueryModel" resultMap="BaseResultMap">
-    select id,countryname,countrycode from country
-    <where>
-            1=1
-        <if test="countryname != null and countryname != ''">
-           and  countryname like concat('%',concat(#{countryname}, '%'))
-        </if>
-        <if test="countrycode != null and countrycode != ''">
-            and countrycode like concat('%',concat(#{countrycode}, '%'))
-        </if>
-        <if test="id != null and id != ''">
-            and   Id = #{id}
-        </if>
-    </where>
-</select>
-
-<select id="getPageSizeZeroelectbyId" resultMap="BaseResultMap">
-    SELECT * FROM  user_info a where a.username = #{var1}</select>
     <select id="selectById" resultType="com.isea533.mybatis.model.Country">
         SELECT * FROM  country a where a.Id = #{ids}
     </select>
+    <insert id="saveCountry" parameterType="Country"><!-- 当parameterType只有一个的时候，可以不填，ibatis自动转换 -->
+        <selectKey keyProperty="id" order="AFTER" resultType="int"><!--将自增结果返回 -->
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        insert into country(<include refid="tempSQL"/>) values(#{countryname},#{countrycode})
+    </insert>
+
+    <cache/>
+    <cache-ref namespace="com.isea533.mybatis.mapper.CountryMapper"></cache-ref>
+    <sql id="tempSQL">countryname, countrycode</sql>  <!-- 定义sql引用模板 -->
 </mapper>

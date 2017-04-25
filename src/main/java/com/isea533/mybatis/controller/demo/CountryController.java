@@ -82,9 +82,26 @@ public class CountryController {
     @RequestMapping("findAll")
     public String findAll(String countryname, String countrycode, String id,ModelMap model) {
         List<Country> list = countryService.selectByCountryQueryModel(countryname,countrycode,id);
-//        List<Country> list = countryService.selectById(id);
         model.addAttribute("list",list);
         return "findAll";
     }
-
+    @RequestMapping("save_zp")
+    public String saveCountry(String countryname, String countrycode,ModelMap model) {
+        Country country = countryService.saveCountry(countryname,countrycode);
+        model.addAttribute("country",country);
+        return "save_zp";
+    }
+    @RequestMapping("findById")
+    public String findById( String id,ModelMap model) {
+        List<Country> list = countryService.selectById(id);
+        model.addAttribute("list",list);
+        return "findAll";
+    }
+    @RequestMapping("update_zp")
+    public String updateCountry(Country country,ModelMap model) {
+        int a = countryService.updateCountry(country);
+        model.addAttribute("code",1);
+        model.addAttribute("message","修改成功");
+        return "message";
+    }
 }

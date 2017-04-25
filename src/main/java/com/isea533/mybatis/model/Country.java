@@ -1,8 +1,9 @@
 package com.isea533.mybatis.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-public class Country {
+public class Country implements Serializable{
     /**
      * 主键
      */

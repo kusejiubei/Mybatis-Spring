@@ -50,5 +50,19 @@ public class CountryServiceImpl extends BaseService<Country> implements CountryS
         return countryMapper.selectById(id);
     }
 
+    @Override
+    public Country saveCountry(String countryname, String countrycode) {
+        Country country = new Country();
+        country.setCountrycode(countrycode);
+        country.setCountryname(countryname);
+        countryMapper.saveCountry(country);
+        return country;
+    }
+
+    @Override
+    public Integer updateCountry(Country country) {
+        return countryMapper.updateCountry(country);
+    }
+
 
 }

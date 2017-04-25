@@ -104,6 +104,7 @@
 
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
         <constructor-arg index="0" ref="sqlSessionFactory"/>
+        <constructor-arg index="1" value="REUSE"/>
     </bean>
 
     <aop:aspectj-autoproxy/>
@@ -118,7 +119,7 @@
             <tx:method name="select*" read-only="true"/>
             <tx:method name="find*" read-only="true"/>
             <tx:method name="get*" read-only="true"/>
-            <tx:method name="*"/>
+            <tx:method name="*" propagation="REQUIRED" />
         </tx:attributes>
     </tx:advice>
 

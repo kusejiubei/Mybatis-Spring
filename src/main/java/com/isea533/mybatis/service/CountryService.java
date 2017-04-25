@@ -22,4 +22,6 @@ public interface CountryService extends IService<Country> {
     List<Country> selectByCountryQueryModel(String countryname, String countrycode, String id );
     List<Country> selectById(String id );
 
+    Country saveCountry(String countryname, String countrycode);
+    Integer updateCountry(Country country);
 }
